@@ -103,9 +103,12 @@ Exception: the acknowledgements, where "I" is fine.
 | Tense — results | Present for what the data shows: *precision drops on…* |
 | Tense — related work | Present: *Zhang et al. propose…* |
 | Tense — the archive/data | Present for what is true now: *layer names differ by customer* |
-| Figures/tables | `Figure~\ref{...}`, `Table~\ref{...}`. Never "the figure below" |
-| Citations | `\cite{key}` only; key must exist in `references.bib` |
+| Cross-references | `\cref{tab:x}`, `\cref{fig:x}`, `\cref{ch:x}`, `\cref{sec:x}`. cleveref prints the name itself, so never prefix it by hand: `Figure~\cref{...}` prints "Figure Figure 3". Do not use bare `Figure~\ref{...}` either; keep one mechanism. Never "the figure below" |
+| Citations | `\cite{key}` only; key must exist in `literature.bib` |
 | Numbers | Never typed inline. `\input{../results/tables/x.tex}` |
+| Numbers in prose | `\num{}` and `\SI{}{}` (siunitx), never bare digits with hand-typed units |
+| Tables | booktabs only: `\toprule`, `\midrule`, `\bottomrule`. No `\hline`, no vertical rules |
+| Abbreviations | `\gls{}` / `\glspl{}` (glossaries-extra), defined in `abbreviations.tex`. Never type the short form by hand |
 
 ---
 
@@ -160,5 +163,5 @@ An agent must verify, and report, before handing back any section:
 2. Did I use an em-dash? (Must be no.)
 3. Is my sentence-length variation close to §2, or is everything the same length?
 4. Does every number come from `\input`?
-5. Does every `\cite` key exist in `references.bib`?
+5. Does every `\cite` key exist in `literature.bib`?
 6. Did I use any banned word from §6?

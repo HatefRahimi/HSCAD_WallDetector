@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail if the thesis cites a key that does not exist in references.bib.
+"""Fail if the thesis cites a key that does not exist in literature.bib.
 
 This is what prevents invented references from reaching a chapter. Run it manually:
 
@@ -21,7 +21,12 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 THESIS_DIR = REPO_ROOT / "thesis"
-BIB_FILE = THESIS_DIR / "references.bib"
+BIB_FILE = THESIS_DIR / "literature.bib"
+# Chapter files sit flat beside thesis_main.tex. lmedoc/ and appendix.tex are not checked.
+CHAPTERS = (
+    "introduction", "background", "data", "methodology",
+    "experiments", "results", "discussion", "conclusion",
+)
 
 BIB_ENTRY = re.compile(r"^\s*@\w+\s*\{\s*([^,\s]+)\s*,", re.MULTILINE)
 # \cite, \citep, \citet, \parencite, \textcite, with optional [..] options
@@ -43,7 +48,7 @@ def bib_keys() -> set[str]:
 
 
 def tex_files() -> list[Path]:
-    return sorted(p for p in THESIS_DIR.rglob("*.tex") if "results" not in p.parts)
+    return [THESIS_DIR / f"{name}.tex" for name in CHAPTERS]
 
 
 def main() -> int:
@@ -53,6 +58,9 @@ def main() -> int:
 
     for path in tex_files():
         rel = path.relative_to(REPO_ROOT)
+        if not path.exists():
+            problems.append(f"{rel}: chapter file missing")
+            continue
         raw = path.read_text(encoding="utf-8")
         body = strip_comments(raw)
 
@@ -87,7 +95,7 @@ def main() -> int:
             print(f"  {item}", file=sys.stderr)
         return 1
 
-    print(f"citations ok — {len(known)} keys in references.bib, no inline numbers")
+    print(f"citations ok — {len(known)} keys in literature.bib, no inline numbers")
     return 0
 
 

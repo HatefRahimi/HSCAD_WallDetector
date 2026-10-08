@@ -1,0 +1,174 @@
+% Document class for LME theses: lmedoc
+% %LANGUAGE
+% %CONFIG
+%    The option "german" uses german.sty
+%    For english papers, use the "english" option
+% Possible types of theses:
+% bt - Bachelor's thesis
+% mt - Master's thesis
+% diss - Dissertation
+% sa - Student thesis
+% fp - Forschungspraktikum
+% pa - Projektarbeit
+%\documentclass[german,bt]{lmedoc/lmedoc}
+\documentclass[english,mt]{lmedoc/lmedoc}
+
+
+%%%%%%%%%%%%%%%%%%
+% pdflatex and lualatex are supported
+% ++ "Umlaut" support
+%    The package "inputenc" can be used to write Umlaute or the german double s
+%    directly. You need to use the correct encoding, e.g. latin1.
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\else
+  \ifXeTeX
+     \usepackage{fontspec}
+  \else 
+     \usepackage{luatextra}
+  \fi
+\fi
+
+%Load additional packages
+\usepackage{lmedoc/packages}
+% put in this file your abbreviations
+\input{abbreviations.tex}
+\usepackage[textsize=footnotesize,colorinlistoftodos]{todonotes}
+%\renewcommand{\todo}[1]{}   % uncomment for a clean print copy
+\graphicspath{{../results/figures/}}
+\hypersetup{pdftitle={Learning Semantic Structure from Industrial Vector CAD Floor
+  Plans}, pdfauthor={Hatef Rahimi}, pdfsubject={Master's thesis}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% supress messages because of underful hbox, this is not a problem
+\hbadness=10000
+
+
+
+% some useful commands
+\makeatletter % let's define a single dot
+\DeclareRobustCommand\onedot{\futurelet\@let@token\@onedot}
+\newcommand{\@onedot}{\ifx\@let@token.\else.\null\fi\xspace}
+\makeatother
+
+
+
+% Sets the bib file
+
+\addbibresource{literature.bib}
+
+% When writing a large document, it is sometimes useful to work on selected sections of the document.
+% Use this command to only build the document partially. Speeds up the developement cycle.
+% For the final product, this has to be commented out.
+%\includeonly{introduction,appendix,foo,bar}
+
+
+\pagenumbering{roman}
+
+\begin{document}
+\clearpage
+% %CONFIG
+% This is for students' theses
+  \begin{deckblatt}
+    \Titel{Learning Semantic Structure from Industrial Vector CAD Floor Plans} % Title
+    \Name{Rahimi} % Last name
+    \Vorname{Hatef} % Given name
+    \Geburtsort{TODO} % Place of birth
+    \Geburtsdatum{TODO} % Date of birth
+    \Betreuer{Matthias Zinnen, Prof. Dr. Andreas Maier, Christian Petry} % Advisor
+    \Start{TODO} % Start of thesis
+    \Ende{TODO} % End of thesis
+    \ZweitInstitut{Siemens Healthineers AG} % Cooperation partner
+  \end{deckblatt}
+
+
+\cleardoublepage
+% Only necessary for thesis
+
+Ich versichere, dass ich die Arbeit ohne fremde Hilfe und ohne Benutzung
+anderer als der angegebenen Quellen angefertigt habe und dass die Arbeit
+in gleicher oder "ahnlicher Form noch keiner anderen Pr"ufungsbeh"orde
+vorgelegen hat und von dieser als Teil einer Pr"ufungsleistung
+angenommen wurde. Alle Ausf"uhrungen, die w"ortlich oder sinngem"a"s
+"ubernommen wurden, sind als solche gekennzeichnet.
+\\
+
+
+\cleardoublepage
+
+
+\begin{center}
+\bfseries
+% Abstract in German
+{\selectlanguage{german}"Ubersicht}
+\normalfont
+\end{center}
+
+
+\vspace{5.0cm}
+
+\begin{center}
+\bfseries
+% Abstract in English
+{\selectlanguage{english}Abstract}
+\normalfont
+\end{center}
+
+
+\cleardoublepage
+
+\tableofcontents
+
+\cleardoublepage \pagenumbering{arabic}
+
+\include{introduction}
+\cleardoublepage
+\include{background}
+\cleardoublepage
+\include{data}
+\cleardoublepage
+\include{methodology}
+\cleardoublepage
+\include{experiments}
+\cleardoublepage
+\include{results}
+\cleardoublepage
+\include{discussion}
+\cleardoublepage
+\include{conclusion}
+\cleardoublepage
+
+\appendix
+\cleardoublepage
+\include{appendix}   % appendix A
+\cleardoublepage
+%\include{thesis10}   % appendix B
+%\cleardoublepage
+%\include{thesis11}   % appendix C
+%\cleardoublepage
+
+%% Do not change, auto-generated lists of figures, tables and literature %%
+% Glossar
+\printunsrtglossary[type=abbreviations]
+\cleardoublepage
+
+% List of figures
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+\cleardoublepage
+
+% List of tables
+\addcontentsline{toc}{chapter}{\listtablename}
+\listoftables
+\cleardoublepage
+
+% Literature list
+% %CONFIG:
+%\selectlanguage{german}{\addcontentsline{toc}{chapter}{\bibname}}
+\selectlanguage{english}{\addcontentsline{toc}{chapter}{\bibname}}
+
+\printbibliography
+\end{document}
