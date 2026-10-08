@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./data/**)",
+      "Read(**/*.dwg)",
+      "Read(**/*.analysis.json)",
+      "Bash(cat ./data/**)",
+      "Bash(head ./data/**)",
+      "Bash(tail ./data/**)",
+      "Bash(grep:* ./data/**)"
+    ]
+  }
+}

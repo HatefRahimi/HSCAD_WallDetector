@@ -1,0 +1,36 @@
+# ---- HARD DATA BOUNDARY: never commit, never let agents read ----
+data/
+*.dwg
+*.analysis.json
+*.scr
+# -----------------------------------------------------------------
+
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# LaTeX build artefacts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+thesis/main.pdf
+
+# Large run outputs (metrics/config JSON are kept)
+runs/**/checkpoints/
+runs/**/*.pt
+runs/**/*.pth
+
+graphify-out/
+.DS_Store

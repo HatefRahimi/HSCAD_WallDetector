@@ -1,0 +1,9 @@
+# Pin exact versions before the first company-machine run.
+# The company machine must run precisely what was tested locally.
+torch
+torch-geometric
+numpy
+scikit-learn
+pyyaml
+shapely
+matplotlib

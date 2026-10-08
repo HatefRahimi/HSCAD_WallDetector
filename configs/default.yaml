@@ -1,0 +1,39 @@
+# Every path and setting lives here. Nothing hardcoded in src/.
+# The ONLY difference between a local run and a company-machine run is which
+# config is passed:  python -m src.train --config configs/company.yaml
+
+data:
+  # Local: permitted samples / public datasets only. Never the full archive.
+  root: ./data/samples
+  cache: ./data/cache          # parsed DWG -> JSON, computed once
+  limit: null                  # set to 50 for a trial run before any full run
+
+split:
+  by: drawing                  # drawing | customer   -- never by element
+  group_key: customer_id       # used when by=customer
+  seed: 20261008               # fixed: same drawings land in the same fold
+  test_fraction: 0.2
+  val_fraction: 0.1
+
+model:
+  name: graphsage
+  layers: 3
+  hidden: 64
+  k_neighbors: 30
+  dropout: 0.3
+
+train:
+  epochs: 100
+  lr: 0.001
+  batch_size: 1
+  device: auto                 # auto | cpu | cuda
+
+eval:
+  positive_class: wall
+  report_classes: [wall, door, window]
+  per_element: true
+
+output:
+  runs_dir: ./runs
+  tables_dir: ./results/tables
+  figures_dir: ./results/figures

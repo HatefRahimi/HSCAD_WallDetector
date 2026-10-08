@@ -1,0 +1,12 @@
+# Company machine. Inherits default.yaml; override only what differs.
+# Agents are NOT involved in runs using this config.
+
+inherit: default.yaml
+
+data:
+  root: /path/to/full/archive   # set on the company machine, never committed with a real path
+  cache: /path/to/cache
+  limit: 50                     # trial run first; set to null for the full run
+
+split:
+  by: customer

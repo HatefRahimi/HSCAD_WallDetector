@@ -1,0 +1,40 @@
+% PLACEHOLDER — replace with the official FAU / Pattern Recognition Lab thesis template.
+% Keep the \input structure below so the chapter files and generated results survive the swap.
+
+\documentclass[11pt,a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\usepackage[textsize=footnotesize]{todonotes}
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+
+\addbibresource{references.bib}
+\graphicspath{{../results/figures/}}
+
+\title{Learning Semantic Structure from Industrial Vector CAD Floor Plans}
+\author{Hatef Rahimi}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\input{chapters/introduction}
+\input{chapters/related_work}
+\input{chapters/data}
+\input{chapters/method}
+\input{chapters/experiments}
+\input{chapters/results}
+\input{chapters/discussion}
+\input{chapters/conclusion}
+
+\printbibliography
+
+\end{document}

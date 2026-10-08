@@ -1,0 +1,12 @@
+#!/bin/sh
+# Blocks a commit that cites a key missing from references.bib, or types a number
+# into prose that should come from a generated table.
+# Enable with: git config core.hooksPath .githooks
+
+if git diff --cached --name-only | grep -q '^thesis/.*\.tex$'; then
+    python3 scripts/check_citations.py || {
+        echo
+        echo "Commit blocked. Fix the above, or bypass with: git commit --no-verify"
+        exit 1
+    }
+fi
