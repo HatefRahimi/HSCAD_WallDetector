@@ -38,6 +38,10 @@ Imitate these. A model matches a sample far better than it follows an adjective.
 - Limitations are stated in the same plain register as results. No hedging apparatus.
 - Concrete nouns throughout: lines, arcs, polylines, block references, drafting office.
 - Colons and semicolons do real structural work, listing variants of one idea.
+- Passive voice is the default for describing what was done: "The archive was built to
+  be read by people." See §3.
+- Hyphenated compound adjectives are a habit worth keeping: *held-out drawings*,
+  *clause-rich sentence*, *customer-specific layer names*. See §4.
 
 > **ADD YOUR OWN.** As you write chapters you are happy with, paste another paragraph
 > here. This section should grow.
@@ -81,6 +85,10 @@ Instead, the subject is the object of study, the method, or the thesis itself:
 | Two directions are available. | We considered two directions. |
 | Wall generation is the natural starting point. | We chose wall generation because… |
 
+The author prefers the **passive voice** for this. Use it freely for methods and
+procedure: *the drawings were split by customer*, *the labels were recovered from the
+planner's 3D objects*. It keeps the object of study in subject position.
+
 This is **not** a licence for agentless passive that hides a decision. When a choice was
 made and the reasoning matters, name the reasoning, not the chooser:
 
@@ -99,6 +107,8 @@ Exception: the acknowledgements, where "I" is fine.
 | Language | English |
 | Spelling | **PICK ONE AND WRITE IT HERE:** British / American |
 | Person | None (see §3) |
+| Voice | Passive preferred for methods and procedure (see §3) |
+| Compound adjectives | Hyphenate before a noun: *held-out drawings*, *layer-based rules*, *wall-generation task*. Do not hyphenate after the noun (*drawings that were held out*) or after an *-ly* adverb (*manually extracted*) |
 | Tense — methods | Past for what was done: *the model was trained on…* |
 | Tense — results | Present for what the data shows: *precision drops on…* |
 | Tense — related work | Present: *Zhang et al. propose…* |
