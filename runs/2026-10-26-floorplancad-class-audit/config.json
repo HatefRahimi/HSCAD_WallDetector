@@ -1,0 +1,55 @@
+{
+  "config_file": "configs/default.yaml",
+  "floorplancad": {
+    "classes": {
+      "door": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "wall": [
+        1
+      ],
+      "window": [
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    "root": "./datasets",
+    "splits": [
+      "train-00",
+      "train-01",
+      "test-00"
+    ],
+    "test_splits": [
+      "test-00"
+    ],
+    "train_splits": [
+      "train-00",
+      "train-01"
+    ]
+  },
+  "layer_kinds": {
+    "door": [
+      "DOOR",
+      "\u95e8"
+    ],
+    "stair": [
+      "STAIR",
+      "\u68af"
+    ],
+    "wall": [
+      "WALL",
+      "\u5899"
+    ],
+    "window": [
+      "WIN",
+      "\u7a97"
+    ]
+  }
+}
