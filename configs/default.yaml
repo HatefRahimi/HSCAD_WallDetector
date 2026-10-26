@@ -14,6 +14,12 @@ public:
     splits: [train-00, train-01, test-00]
     train_splits: [train-00, train-01]
     test_splits: [test-00]
+    # Folders that share one prefix numbering (decision 0006). A source is
+    # (namespace, prefix); sources linked by an identical file form one group.
+    prefix_namespaces:
+      train-00: a
+      train-01: b
+      test-00: b
     # semantic-id values per evaluated class in this release (decision 0005).
     # Every other id, and elements without one, count as "other".
     classes:
