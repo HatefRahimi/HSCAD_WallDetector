@@ -1,0 +1,22 @@
+{
+  "distinct_contents": 15361,
+  "duplicate_content_groups": 229,
+  "duplicate_groups_across_train_and_test": 122,
+  "files": 15663,
+  "files_per_group_max": 177,
+  "files_per_group_median": 6.0,
+  "groups": 1624,
+  "sources": 1800,
+  "test_file_fraction_with_group_in_train": 0.9729,
+  "test_files": 5502,
+  "test_files_with_group_in_train": 5353,
+  "train-00_vs_test-00_random_pair_layer_jaccard": 0.0733,
+  "train-00_vs_test-00_same_prefix_layer_jaccard": 0.0858,
+  "train-00_vs_test-00_shared_prefixes": 459,
+  "train-00_vs_train-01_random_pair_layer_jaccard": 0.074,
+  "train-00_vs_train-01_same_prefix_layer_jaccard": 0.0841,
+  "train-00_vs_train-01_shared_prefixes": 462,
+  "train-01_vs_test-00_random_pair_layer_jaccard": 0.1133,
+  "train-01_vs_test-00_same_prefix_layer_jaccard": 0.7335,
+  "train-01_vs_test-00_shared_prefixes": 1045
+}

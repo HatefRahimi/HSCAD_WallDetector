@@ -2,9 +2,9 @@
 id: 0004
 date: 2026-10-26
 title: Split FloorPlanCAD by file-name prefix, not by the official split
-status: accepted
+status: superseded
 supersedes:
-superseded-by:
+superseded-by: 0006
 runs: [2026-10-26-floorplancad-split-audit]
 ---
 
