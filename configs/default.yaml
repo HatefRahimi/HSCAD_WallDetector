@@ -8,6 +8,13 @@ data:
   cache: ./data/cache          # parsed DWG -> JSON, computed once
   limit: null                  # set to 50 for a trial run before any full run
 
+public:
+  floorplancad:
+    root: ./datasets           # git-ignored; agents may read it
+    splits: [train-00, train-01, test-00]
+    train_splits: [train-00, train-01]
+    test_splits: [test-00]
+
 split:
   by: drawing                  # drawing | customer   (never by element)
   group_key: customer_id       # used when by=customer
