@@ -1,0 +1,18 @@
+{
+  "config_file": "configs/default.yaml",
+  "floorplancad": {
+    "root": "./datasets",
+    "splits": [
+      "train-00",
+      "train-01",
+      "test-00"
+    ],
+    "test_splits": [
+      "test-00"
+    ],
+    "train_splits": [
+      "train-00",
+      "train-01"
+    ]
+  }
+}

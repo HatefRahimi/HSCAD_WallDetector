@@ -1,0 +1,13 @@
+{
+  "all_prefixes": 1298,
+  "crops_per_prefix_max": 173,
+  "crops_per_prefix_median": 8.0,
+  "crops_per_prefix_min": 1,
+  "test_file_fraction_with_prefix_in_train": 0.9815,
+  "test_files": 5502,
+  "test_files_with_prefix_in_train": 5400,
+  "test_prefixes": 1125,
+  "test_prefixes_also_in_train": 1085,
+  "train_files": 10161,
+  "train_prefixes": 1258
+}
