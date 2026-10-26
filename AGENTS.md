@@ -1,4 +1,4 @@
-# Project brief — Master's thesis
+# Project brief: Master's thesis
 
 **This file is the single source of truth for both agents (Claude Code and Codex/GPT).**
 Read it fully before doing anything in this repository.
@@ -10,12 +10,12 @@ Read it fully before doing anything in this repository.
 **Title:** Learning Semantic Structure from Industrial Vector CAD Floor Plans
 **Author:** Hatef Rahimi
 **Institution:** Pattern Recognition Lab, FAU Erlangen-Nürnberg
-**Industry partner:** Siemens Healthineers AG, Enterprise Services — Facility Design and Planning Services
+**Industry partner:** Siemens Healthineers AG, Enterprise Services, Facility Design and Planning Services
 **Supervisors:** Matthias Zinnen, Prof. Dr. Andreas Maier, Christian Petry (Siemens Healthineers)
 
 ### Research question
 
-Can a collection of industrial DWG floor plans — never annotated for machine learning —
+Can a collection of industrial DWG floor plans, never annotated for machine learning,
 be used to train a model that recognizes what each element of a drawing represents, and
 which kind of method is best suited to the task?
 
@@ -34,24 +34,15 @@ Two sub-questions the thesis must answer:
 - **Secondary / stretch:** doors and windows (much rarer, harder).
 - **Final practical check:** can detected geometry be turned into valid 3D HSCAD objects?
 
-### Baseline to beat
+### Baselines
 
-Existing `HscadWallDetector` pipeline:
-
-- C# parser (AcadSharp) exports `.analysis.json` from DWG geometry
-- Python GNN: GraphSAGE, 3 layers, ~84K parameters, PyTorch Geometric
-- 27 features per entity (15 one-hot entity-type + geometric/relational, k=30 neighbors)
-- Binary node classification: wall vs. not_wall
-- **Best result so far: precision ≈ 0.48, recall ≈ 0.75, F1 ≈ 0.587**
-- `group_wall_lines()` pairs parallel predictions into centerline+width segments
-- `generate_scr()` emits batched AutoLISP, 50 walls per function (65536-byte limit)
-
-Open question: adding large ArchCAD batches *hurt* performance. Unknown whether this is a
-model-capacity ceiling or a domain gap. Do not assert either in writing without evidence.
+No prior result is cited. Every baseline is built and measured in this repository, under
+the protocol in §2, and introduced by a decision record. Until one exists, the thesis
+has no baseline number.
 
 ---
 
-## 2. Evaluation protocol (FROZEN — change only via a decision record)
+## 2. Evaluation protocol (FROZEN: change only via a decision record)
 
 - **Primary metrics:** per-element precision, recall, F1 for the wall class.
 - **Held-out split:** by **drawing**, and where possible by **customer / drafting office**.
@@ -63,7 +54,7 @@ model-capacity ceiling or a domain gap. Do not assert either in writing without 
 
 ---
 
-## 3. Data boundary (HARD RULE — no exceptions)
+## 3. Data boundary (HARD RULE: no exceptions)
 
 Siemens Healthineers does **not** permit external AI services on company data.
 
@@ -74,7 +65,7 @@ Siemens Healthineers does **not** permit external AI services on company data.
 - `data/` is git-ignored and agent-denied. Keep full archive data **off this machine**.
 - Full-archive runs happen on the company machine, with agents not involved.
 - Only aggregate results come back: metrics, per-style breakdowns with anonymized IDs,
-  failure counts by reason — attached to a run ID and git tag.
+  failure counts by reason, attached to a run ID and git tag.
 
 **If a task appears to require company data, stop and say so instead of improvising.**
 
@@ -110,7 +101,7 @@ against the full archive.
 - Environment pinned via lockfile. The company machine runs exactly what was tested.
 - Pipeline must survive bad files: log the failure with a reason, skip, continue.
   Finish with a data report (processed / failed / why).
-- Parsing stage is cached — DWG→JSON happens once, not per run.
+- Parsing stage is cached: DWG→JSON happens once, not per run.
 - Always trial-run with `--limit 50` on the company machine before a full run.
 - Tag each snapshot in git (`run-YYYY-MM-DD`); results come back labeled with that tag.
 
@@ -137,7 +128,7 @@ Skills for Codex live in `.agents/skills/`; commands for Claude live in
 
 ## 7. Writing rules
 
-See `STYLE.md` — the language DNA, derived from measurements of the author's own prose.
+See `STYLE.md`, the language DNA, derived from measurements of the author's own prose.
 It is binding for every word written into `thesis/`. The two rules broken most often:
 **no first person** (§3) and **no em-dashes** (§6).
 
@@ -153,7 +144,7 @@ It is binding for every word written into `thesis/`. The two rules broken most o
 ## 8. Conventions
 
 - Commit trailer: `Assisted-by: Claude` or `Assisted-by: Codex` (or both lines).
-- Decision records are numbered sequentially and never edited after being superseded —
+- Decision records are numbered sequentially and never edited after being superseded;
   write a new one that supersedes the old.
 - Reviews target uncommitted changes or the branch vs. `main`. Work in small units:
   one unit of work → review → commit.

@@ -6,9 +6,9 @@ argument-hint: <chapter/section> e.g. method/labeling
 Draft the thesis section: **$ARGUMENTS**
 
 GPT is the writer for this thesis (`AGENTS.md` §6). Your job here is to prepare the
-material, delegate the drafting, and review the result — not to write the prose yourself.
+material, delegate the drafting, and review the result, not to write the prose yourself.
 
-## Step 1 — prepare
+## Step 1: prepare
 
 Read `STYLE.md` and `AGENTS.md`. Then gather what the section needs and report it to me
 in plain text:
@@ -20,7 +20,7 @@ in plain text:
 
 If a needed table does not exist yet, say so. Do not fabricate the number.
 
-## Step 2 — delegate
+## Step 2: delegate
 
 Run:
 
@@ -31,7 +31,7 @@ Run:
 instructing it to use its `draft-section` skill on **$ARGUMENTS**, and naming the
 specific decision records, run IDs and tables you identified in step 1.
 
-## Step 3 — review what comes back
+## Step 3: review what comes back
 
 Review the draft against `STYLE.md` §8, specifically:
 
@@ -48,5 +48,5 @@ Report findings and ask before fixing. Do not commit.
 
 ## If GPT is unavailable
 
-Say so and stop. Do not quietly draft it yourself — the point of the split is that the
+Say so and stop. Do not quietly draft it yourself. The point of the split is that the
 drafting agent and the reviewing agent are different.

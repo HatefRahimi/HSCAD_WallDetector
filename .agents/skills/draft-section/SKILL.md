@@ -11,11 +11,11 @@ pasted context.
 
 ## Read first, every time
 
-1. `STYLE.md` — the language DNA. Binding. Section 3 (no first person) and section 6
+1. `STYLE.md`: the language DNA. Binding. Section 3 (no first person) and section 6
    (no em-dashes) are the two rules most often broken.
-2. `AGENTS.md` — scope, frozen evaluation protocol, baseline numbers, data boundary.
+2. `AGENTS.md`: scope, frozen evaluation protocol, data boundary.
 
-## Sources you may draw on — and nothing else
+## Sources you may draw on, and nothing else
 
 | Source | What it gives you |
 |---|---|

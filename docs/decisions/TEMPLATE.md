@@ -14,8 +14,8 @@ What question came up, and why it had to be answered now. Two or three sentences
 
 ## Options considered
 
-- **A —** …
-- **B —** …
+- **A:** …
+- **B:** …
 
 ## Decision
 
@@ -24,7 +24,7 @@ What was chosen. One or two sentences, stated plainly.
 ## Evidence
 
 What supports this. Every number cites a run ID. If the decision rests on judgement
-rather than measurement, say so explicitly — that is a legitimate answer and a more
+rather than measurement, say so explicitly; that is a legitimate answer and a more
 useful record than a fabricated justification.
 
 ## Consequences

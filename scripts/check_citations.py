@@ -32,7 +32,7 @@ BIB_ENTRY = re.compile(r"^\s*@\w+\s*\{\s*([^,\s]+)\s*,", re.MULTILINE)
 # \cite, \citep, \citet, \parencite, \textcite, with optional [..] options
 CITE_CALL = re.compile(r"\\(?:cite[a-zA-Z]*|parencite|textcite)\s*(?:\[[^\]]*\])*\s*\{([^}]*)\}")
 COMMENT = re.compile(r"(?<!\\)%.*$", re.MULTILINE)
-# A bare decimal in prose — the thing that should have come from a generated table.
+# A bare decimal in prose: the thing that should have come from a generated table.
 INLINE_NUMBER = re.compile(r"(?<![\w.\\{=\-])\d+\.\d+(?![\w.}])")
 
 
@@ -74,7 +74,7 @@ def main() -> int:
             if "\\input" not in line and "\\includegraphics" not in line:
                 for match in INLINE_NUMBER.finditer(line):
                     problems.append(
-                        f"{rel}:{lineno}: inline number '{match.group()}' — "
+                        f"{rel}:{lineno}: inline number '{match.group()}': "
                         "use \\input{../results/tables/...} instead"
                     )
 
@@ -95,7 +95,7 @@ def main() -> int:
             print(f"  {item}", file=sys.stderr)
         return 1
 
-    print(f"citations ok — {len(known)} keys in literature.bib, no inline numbers")
+    print(f"citations ok: {len(known)} keys in literature.bib, no inline numbers")
     return 0
 
 

@@ -13,8 +13,8 @@ Read `STYLE.md` and `AGENTS.md` first, then the chapter file(s).
    `\cite{}` key present in `references.bib`? List each sentence that does not.
 2. **Numbers.** Any number typed inline rather than `\input` from `results/tables/`?
    Each is an error regardless of whether the value is correct.
-3. **Overreach.** Any sentence claiming more than was measured — generalization,
-   superiority, causation — that the runs do not support?
+3. **Overreach.** Any sentence claiming more than was measured (generalization,
+   superiority, causation) that the runs do not support?
 4. **Language DNA.** Violations of `STYLE.md`: first person, em-dashes, banned words,
    wrong tense, inconsistent terminology, uniform sentence length where the fingerprint
    in §2 calls for variation.

@@ -5,10 +5,10 @@ Usage, from inside your training/eval script:
 
     from scripts.log_run import log_run
     log_run(
-        name="gnn-baseline",
-        config={"model": "graphsage", "layers": 3, "k": 30},
-        metrics={"wall_precision": 0.48, "wall_recall": 0.75, "wall_f1": 0.587},
-        notes="Baseline reproduction on the hand-verified set.",
+        name="wall-baseline",
+        config=config,
+        metrics={"wall_precision": precision, "wall_recall": recall, "wall_f1": f1},
+        notes="Held-out drawings, split by drawing.",
     )
 
 Or from the command line, to record a run you did elsewhere (e.g. on the company
@@ -123,7 +123,7 @@ def log_run(
 
     if git_state["dirty"]:
         print(
-            f"warning: working tree was dirty for {run_dir.name} — "
+            f"warning: working tree was dirty for {run_dir.name}: "
             "this run is not reproducible from a commit",
             file=sys.stderr,
         )

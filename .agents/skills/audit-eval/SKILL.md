@@ -30,5 +30,5 @@ line reference.
 
 ## Output
 
-Findings list, then the specific fixes you would make. Do not apply fixes — this code is
+Findings list, then the specific fixes you would make. Do not apply fixes; this code is
 frozen by the brief, and any change requires a decision record.

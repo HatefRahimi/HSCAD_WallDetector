@@ -1,4 +1,4 @@
-# Thesis workspace — Learning Semantic Structure from Industrial Vector CAD Floor Plans
+# Thesis workspace: Learning Semantic Structure from Industrial Vector CAD Floor Plans
 
 Two agents (Claude Code and Codex/GPT) work on one repository. Nothing is copy-pasted
 between them: GPT reads the same files Claude writes. The thesis is drafted continuously
@@ -28,18 +28,18 @@ Then, inside Claude Code (`claude`):
 /codex:setup
 ```
 
-Leave the automatic review gate **off**. Call reviews deliberately — it otherwise loops
+Leave the automatic review gate **off**. Call reviews deliberately; it otherwise loops
 between the two agents and burns through both subscriptions.
 
 ## Before you write anything
 
-1. **`AGENTS.md`** — fill in anything marked as yours. This is the file both agents read.
-2. **`STYLE.md`** — already built from your proposal's measured style. Set the
+1. **`AGENTS.md`**: fill in anything marked as yours. This is the file both agents read.
+2. **`STYLE.md`**: already built from your proposal's measured style. Set the
    spelling convention in §4 (currently blank), and add more voice samples to §1 as you
    write chapters you like.
-3. **`thesis/main.tex`** — swap the placeholder for the official FAU/PRL template, keeping
+3. **`thesis/main.tex`**: swap the placeholder for the official FAU/PRL template, keeping
    the `\input` structure.
-4. **`thesis/references.bib`** — point Zotero (Better BibTeX) here with auto-export on.
+4. **`thesis/references.bib`**: point Zotero (Better BibTeX) here with auto-export on.
 
 ## Daily loop
 
@@ -51,7 +51,7 @@ between the two agents and burns through both subscriptions.
 | Draft a section (GPT writes) | `/draft-section method/labeling` |
 | Have Claude challenge a chapter | `/review-chapter method` |
 | Audit the evaluation code | `/audit-eval` |
-| Commit | `git commit` — the hook checks citations |
+| Commit | `git commit` (the hook checks citations) |
 
 Work in small units: one unit → review → commit. Reviews target uncommitted changes or
 your branch against `main`.
@@ -59,20 +59,20 @@ your branch against `main`.
 ## Layout
 
 ```
-AGENTS.md              project brief — single source of truth for both agents
+AGENTS.md              project brief, single source of truth for both agents
 CLAUDE.md              pointer to AGENTS.md + Claude-specific rules
-STYLE.md               language DNA — measured from your own prose; binding
+STYLE.md               language DNA, measured from your own prose; binding
 .claude/commands/      Claude: /log  /draft-section  /review-chapter  /audit-eval
 .agents/skills/        Codex/GPT: draft-section, review-chapter, audit-eval
 .claude/settings.json  denies agent access to data/
-docs/decisions/        numbered decision records — the narrative record
+docs/decisions/        numbered decision records, the narrative record
 runs/                  one directory per experiment: config, metrics, environment
-results/tables/        generated .tex tables — chapters \input these
-results/figures/       generated figures — chapters \includegraphics these
+results/tables/        generated .tex tables; chapters \input these
+results/figures/       generated figures; chapters \includegraphics these
 thesis/                LaTeX: main.tex, chapters/, references.bib
 src/                   pipeline code
 configs/               all paths and settings; nothing hardcoded
-data/                  git-ignored, agent-denied — permitted samples only
+data/                  git-ignored, agent-denied; permitted samples only
 scripts/               log_run.py, check_citations.py
 .githooks/pre-commit   blocks unknown citation keys and inline numbers
 ```
@@ -80,7 +80,7 @@ scripts/               log_run.py, check_citations.py
 ## Roles
 
 GPT drafts the prose; Claude engineers the pipeline and reviews the drafts. Both read the
-same repository, so nothing is pasted between them. Swap the roles occasionally — what
+same repository, so nothing is pasted between them. Swap the roles occasionally. What
 must never happen is one agent drafting and approving its own text.
 
 ## The three rules that make this work
@@ -100,7 +100,7 @@ thinking and are what examiners probe. Agents may critique them; they must not d
 
 ## Later
 
-`graphify` (knowledge-graph layer over the repo) around month 2–3, once there is enough
+`graphify` (knowledge-graph layer over the repo) around month 2 to 3, once there is enough
 code and literature that navigating by hand is annoying. Check what it sends off-machine
 before pointing it at anything.
 

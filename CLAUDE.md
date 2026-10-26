@@ -1,6 +1,6 @@
 # Claude Code instructions
 
-Read `AGENTS.md` first — it is the project brief and the single source of truth.
+Read `AGENTS.md` first; it is the project brief and the single source of truth.
 Read `STYLE.md` before writing any word that goes into `thesis/`.
 
 ## Non-negotiable
@@ -13,4 +13,10 @@ Read `STYLE.md` before writing any word that goes into `thesis/`.
 
 ## Commit trailers
 
-Add `Assisted-by: Claude` to commits you help produce.
+Add `Assisted-by: Claude` to commits you help produce. Never add a `Co-Authored-By:`
+trailer or a "Generated with Claude Code" line to commits or pull requests.
+
+## Punctuation
+
+No em-dashes, en-dashes, or `--` used as a dash, in any file and in chat. Command-line
+flags such as `--limit` are syntax and stay.

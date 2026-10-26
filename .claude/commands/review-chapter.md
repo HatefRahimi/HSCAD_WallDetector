@@ -5,7 +5,7 @@ argument-hint: <chapter> e.g. method
 
 Review the chapter: **$ARGUMENTS**
 
-## Step 1 — your own review
+## Step 1: your own review
 
 Read `STYLE.md` and `AGENTS.md`, then read the chapter file(s) under `thesis/chapters/`.
 
@@ -14,7 +14,7 @@ Check every paragraph against this rubric:
 1. **Traceability.** Does every factual claim trace to a decision record, a run ID, or a
    `\cite{}` key that exists in `references.bib`? List any sentence that does not.
 2. **Numbers.** Is any number typed inline instead of coming from
-   `\input{../results/tables/...}`? List each one — these are errors regardless of
+   `\input{../results/tables/...}`? List each one; these are errors regardless of
    whether the value is correct.
 3. **Overreach.** Does any sentence claim more than was measured? Flag claims of
    generalization, superiority, or causation that the runs do not support.
@@ -27,7 +27,7 @@ Check every paragraph against this rubric:
 
 Report as a list with line references. Do not rewrite yet.
 
-## Step 2 — adversarial review by GPT
+## Step 2: adversarial review by GPT
 
 Run:
 

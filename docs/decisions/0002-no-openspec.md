@@ -19,9 +19,9 @@ The question was whether to adopt it alongside the decision-record loop in this 
 
 ## Options considered
 
-- **A —** Adopt OpenSpec and run thesis work through propose/apply/archive.
-- **B —** Keep decision records as the only specification layer.
-- **C —** Adopt it later, scoped to the pipeline code only, if the code side grows.
+- **A:** Adopt OpenSpec and run thesis work through propose/apply/archive.
+- **B:** Keep decision records as the only specification layer.
+- **C:** Adopt it later, scoped to the pipeline code only, if the code side grows.
 
 ## Decision
 
@@ -33,7 +33,7 @@ Judgement, not measurement. The reasoning:
 
 - OpenSpec answers "what should be built, agreed before building". A thesis mostly
   answers "what did the data turn out to support". The second is a record of findings,
-  not a contract agreed in advance — decision records fit it, specs do not.
+  not a contract agreed in advance; decision records fit it, specs do not.
 - Much of this work is exploratory. Writing a spec for an experiment whose outcome
   determines the next step adds ceremony without reducing risk.
 - The three records this project actually needs (decisions, runs, generated results) are
@@ -44,8 +44,8 @@ Judgement, not measurement. The reasoning:
 ## Consequences
 
 - One fewer system to learn during thesis setup.
-- If the pipeline code becomes substantial and multi-component — for example a full
-  raster branch plus the mapping back to vector elements plus HSCAD emission — OpenSpec
+- If the pipeline code becomes substantial and multi-component (for example a full
+  raster branch plus the mapping back to vector elements plus HSCAD emission), OpenSpec
   is worth reassessing for that code only, not for the thesis narrative.
 
 ## Still unresolved

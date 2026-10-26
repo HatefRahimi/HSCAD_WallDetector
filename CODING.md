@@ -4,7 +4,7 @@ Binding for every line of code written in this repository, by a person or an age
 Read alongside `AGENTS.md`.
 
 The goal is not elegance. It is that a number in the thesis can be reproduced eight
-months from now, on a different machine, by someone who was not there — and that the
+months from now, on a different machine, by someone who was not there, and that the
 code reads like a person wrote it.
 
 Languages: **C#** (DWG parsing, HSCAD emission) and **Python** (pipeline, models,
@@ -30,7 +30,7 @@ evaluation).
 ## 2. Working style
 
 - **Iterative and targeted.** Change the few lines that need changing. Do not
-  regenerate a whole file to alter one function — the diff is what gets reviewed, and a
+  regenerate a whole file to alter one function. The diff is what gets reviewed, and a
   rewritten file hides what actually changed.
 - **Explain the why before implementing.** For anything architectural, state the
   reasoning and the alternative rejected, and wait. Mechanical fixes need no preamble.
@@ -289,7 +289,7 @@ silently change a number already written into a chapter.
 build artifacts: regenerated, never hand-edited.
 
 - Tables emit **booktabs** bodies (`\toprule`, `\midrule`, `\bottomrule`). No `\hline`,
-  no vertical rules — the LME template requires this.
+  no vertical rules; the LME template requires this.
 - A table file contains the tabular body only. The caption and `\label` live in the
   chapter, so the thesis controls presentation and the script controls numbers.
 - Figures: PDF for vector plots, PNG at 300 dpi for rasters. Readable at print size,

@@ -54,7 +54,7 @@ Taken from the proposal body (41 sentences). Match this distribution; do not fla
 
 | Feature | Target | Note |
 |---|---|---|
-| Mean sentence length | ~25 words | Not a cap — an average |
+| Mean sentence length | ~25 words | Not a cap, an average |
 | Median | ~22 words | |
 | Short sentences (≤12 words) | ~15% of sentences | These carry the punchlines |
 | Long sentences (≥30 words) | ~30% of sentences | Clause-rich, semicolon-linked |
@@ -70,7 +70,7 @@ recognizable sign of generated prose. Deliberately alternate long and short.
 
 ---
 
-## 3. Person and agency — read carefully
+## 3. Person and agency (read carefully)
 
 The author's proposal uses **no first person at all**, singular or plural. Do not
 introduce it.
@@ -109,10 +109,10 @@ Exception: the acknowledgements, where "I" is fine.
 | Person | None (see §3) |
 | Voice | Passive preferred for methods and procedure (see §3) |
 | Compound adjectives | Hyphenate before a noun: *held-out drawings*, *layer-based rules*, *wall-generation task*. Do not hyphenate after the noun (*drawings that were held out*) or after an *-ly* adverb (*manually extracted*) |
-| Tense — methods | Past for what was done: *the model was trained on…* |
-| Tense — results | Present for what the data shows: *precision drops on…* |
-| Tense — related work | Present: *Zhang et al. propose…* |
-| Tense — the archive/data | Present for what is true now: *layer names differ by customer* |
+| Tense, methods | Past for what was done: *the model was trained on…* |
+| Tense, results | Present for what the data shows: *precision drops on…* |
+| Tense, related work | Present: *Zhang et al. propose…* |
+| Tense, the archive/data | Present for what is true now: *layer names differ by customer* |
 | Cross-references | `\cref{tab:x}`, `\cref{fig:x}`, `\cref{ch:x}`, `\cref{sec:x}`. cleveref prints the name itself, so never prefix it by hand: `Figure~\cref{...}` prints "Figure Figure 3". Do not use bare `Figure~\ref{...}` either; keep one mechanism. Never "the figure below" |
 | Citations | `\cite{key}` only; key must exist in `literature.bib` |
 | Numbers | Never typed inline. `\input{../results/tables/x.tex}` |
@@ -140,13 +140,14 @@ Exception: the acknowledgements, where "I" is fine.
 
 ## 6. Banned
 
-- **Em-dashes.** The author uses none. Use a full stop or a semicolon.
+- **Em-dashes and en-dashes,** including their LaTeX forms `---` and `--`. The author
+  uses none. Use a full stop or a semicolon; write ranges as "3 to 6".
 - First person, outside the acknowledgements.
 - Hedging stacks: "it could potentially be argued that it may possibly…"
 - Hype: novel, powerful, cutting-edge, state-of-the-art (unless comparing against a named
   SOTA number), revolutionary, seamless, leverage (as a verb).
 - Connective filler openers: Moreover, Furthermore, Additionally, Notably, Importantly.
-- "In this thesis, we will…" — doubly banned (first person *and* filler).
+- "In this thesis, we will…": doubly banned (first person *and* filler).
 - Agentless passive that hides a decision ("it was determined that…").
 - Claims of generality beyond what was measured.
 - Tricolon padding: three adjectives where one is accurate.
@@ -156,12 +157,12 @@ Exception: the acknowledgements, where "I" is fine.
 ## 7. Structure conventions
 
 - One idea per paragraph. A paragraph needing a semicolon to hold together is two
-  paragraphs — note that this differs from sentence-level semicolon use, which is fine.
+  paragraphs. Note that this differs from sentence-level semicolon use, which is fine.
 - Every section opens by saying what it establishes, not by restating its own title.
 - Limitations appear in the section where the result appears, not only in a final
   catch-all.
 - A term is defined once, at first use, in the chapter where it first matters.
-- Paragraphs run 3–6 sentences. A one-sentence paragraph is allowed for emphasis, rarely.
+- Paragraphs run 3 to 6 sentences. A one-sentence paragraph is allowed for emphasis, rarely.
 
 ---
 

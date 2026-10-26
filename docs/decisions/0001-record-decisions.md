@@ -17,8 +17,8 @@ needed that agents read instead of remembering.
 
 ## Options considered
 
-- **A —** Keep notes externally (notebook, Notion) and paste context into sessions.
-- **B —** Numbered decision records committed alongside the code, read by both agents.
+- **A:** Keep notes externally (notebook, Notion) and paste context into sessions.
+- **B:** Numbered decision records committed alongside the code, read by both agents.
 
 ## Decision
 
@@ -34,7 +34,7 @@ written down at the time the decision was made.
 ## Consequences
 
 - `/draft-section` can be restricted to decision records, run metrics, and the bib file.
-- Anything not recorded cannot be written into the thesis — this is intentional friction.
+- Anything not recorded cannot be written into the thesis; this is intentional friction.
 - The declaration of AI assistance required by FAU can be generated from git history
   plus these records.
 

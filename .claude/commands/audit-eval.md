@@ -5,7 +5,7 @@ description: Audit split and metric code for leakage, then send it to GPT for ad
 Audit the evaluation code. This is the highest-stakes code in the repository: leakage
 here invalidates every downstream claim in the thesis.
 
-## Step 1 — your own audit
+## Step 1: your own audit
 
 Read `AGENTS.md` §2 (frozen evaluation protocol), then examine the split and metric code
 under `src/`. Check specifically:
@@ -26,7 +26,7 @@ under `src/`. Check specifically:
 
 Report findings as a list, each with a file and line reference.
 
-## Step 2 — adversarial review by GPT
+## Step 2: adversarial review by GPT
 
 Then run:
 
@@ -45,5 +45,5 @@ with focus text along these lines:
 ## Step 3
 
 Summarize both audits together, flag any disagreement between them, and propose the
-specific fixes. Do not apply fixes without asking — this code is frozen by the brief, so
+specific fixes. Do not apply fixes without asking; this code is frozen by the brief, so
 any change requires a decision record via `/log`.
