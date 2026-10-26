@@ -1,0 +1,18 @@
+{
+  "distinct_contents_parsed": 15361,
+  "elements_arc": 1229310,
+  "elements_circle": 113296,
+  "elements_distinct_contents": 10902815,
+  "elements_door": 374613,
+  "elements_ellipse": 8561,
+  "elements_line": 9221615,
+  "elements_text": 330033,
+  "elements_wall": 1098429,
+  "elements_window": 166429,
+  "files": 15663,
+  "files_cached": 302,
+  "files_failed": 0,
+  "files_parsed": 15361,
+  "labelled_elements_distinct_contents": 3810878,
+  "sources": 1800
+}
