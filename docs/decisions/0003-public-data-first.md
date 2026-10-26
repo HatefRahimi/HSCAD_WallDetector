@@ -2,9 +2,9 @@
 id: 0003
 date: 2026-10-26
 title: Develop on FloorPlanCAD first, then the archive, then transfer between them
-status: accepted
+status: superseded
 supersedes:
-superseded-by:
+superseded-by: 0008
 runs: []
 ---
 
