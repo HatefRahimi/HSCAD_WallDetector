@@ -35,6 +35,8 @@ split:
   seed: 20261008               # fixed: same drawings land in the same fold
   test_fraction: 0.2
   val_fraction: 0.1
+  # Frozen FloorPlanCAD folds; experiments read runs/<this>/split.csv (decision 0007).
+  floorplancad_run: 2026-10-26-floorplancad-split
 
 model:
   name: graphsage

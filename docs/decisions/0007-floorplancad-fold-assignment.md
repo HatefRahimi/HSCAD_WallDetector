@@ -5,7 +5,7 @@ title: Assign FloorPlanCAD groups to folds by seeded shuffle and freeze the resu
 status: accepted
 supersedes:
 superseded-by:
-runs: []
+runs: [2026-10-26-floorplancad-split]
 ---
 
 ## Context

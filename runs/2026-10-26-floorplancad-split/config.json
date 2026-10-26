@@ -1,0 +1,51 @@
+{
+  "config_file": "configs/default.yaml",
+  "floorplancad": {
+    "cache": "./datasets/cache/floorplancad",
+    "classes": {
+      "door": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "wall": [
+        1
+      ],
+      "window": [
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    "limit": null,
+    "prefix_namespaces": {
+      "test-00": "b",
+      "train-00": "a",
+      "train-01": "b"
+    },
+    "root": "./datasets",
+    "splits": [
+      "train-00",
+      "train-01",
+      "test-00"
+    ],
+    "test_splits": [
+      "test-00"
+    ],
+    "train_splits": [
+      "train-00",
+      "train-01"
+    ]
+  },
+  "split": {
+    "by": "drawing",
+    "group_key": "customer_id",
+    "seed": 20261008,
+    "test_fraction": 0.2,
+    "val_fraction": 0.1
+  }
+}
