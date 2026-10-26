@@ -1,5 +1,6 @@
 # ---- HARD DATA BOUNDARY: never commit, never let agents read ----
 data/
+datasets/
 *.dwg
 *.analysis.json
 *.scr
