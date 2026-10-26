@@ -38,6 +38,17 @@ split:
   # Frozen FloorPlanCAD folds; experiments read runs/<this>/split.csv (decision 0007).
   floorplancad_run: 2026-10-26-floorplancad-split
 
+baseline:
+  # Per-element gradient boosting on geometric features (src/graph/features.py).
+  workers: 14                  # processes for feature extraction
+  learning_rate: 0.1
+  max_iter: 300
+  max_leaf_nodes: 63
+  min_samples_leaf: 200
+  l2_regularization: 1.0
+  n_iter_no_change: 15         # early stopping on the validation fold
+  seed: 20261008
+
 model:
   name: graphsage
   layers: 3
