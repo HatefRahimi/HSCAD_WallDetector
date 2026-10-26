@@ -11,6 +11,8 @@ data:
 public:
   floorplancad:
     root: ./datasets           # git-ignored; agents may read it
+    cache: ./datasets/cache/floorplancad   # parsed elements, keyed by content hash
+    limit: null                # number of files, for a quick trial; null for all
     splits: [train-00, train-01, test-00]
     train_splits: [train-00, train-01]
     test_splits: [test-00]

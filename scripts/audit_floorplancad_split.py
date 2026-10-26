@@ -22,7 +22,6 @@ from itertools import combinations
 from pathlib import Path
 
 import yaml
-
 from log_run import log_run
 
 LAYER_LABEL = re.compile(rb'inkscape:label="([^"]*)"')
@@ -85,7 +84,9 @@ def main() -> None:
         shared = sorted(set(prefixes_a) & set(prefixes_b))
         same = [_jaccard(vocabulary[(a, p)], vocabulary[(b, p)]) for p in shared]
         rand = [
-            _jaccard(vocabulary[(a, rng.choice(prefixes_a))], vocabulary[(b, rng.choice(prefixes_b))])
+            _jaccard(
+                vocabulary[(a, rng.choice(prefixes_a))], vocabulary[(b, rng.choice(prefixes_b))]
+            )
             for _ in range(PAIR_SAMPLES)
         ]
         key = f"{a}_vs_{b}"
@@ -137,7 +138,11 @@ def main() -> None:
 
     log_run(
         name="floorplancad-split-audit",
-        config={"config_file": args.config, "floorplancad": dataset, "seed": config["split"]["seed"]},
+        config={
+            "config_file": args.config,
+            "floorplancad": dataset,
+            "seed": config["split"]["seed"],
+        },
         metrics=metrics,
         notes="Namespace-aware prefix overlap and exact duplicates in the official split.",
     )

@@ -17,7 +17,6 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 import yaml
-
 from log_run import log_run
 
 SVG = "{http://www.w3.org/2000/svg}"
