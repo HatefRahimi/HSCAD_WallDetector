@@ -29,6 +29,15 @@ from src.parsing import cache
 log = logging.getLogger(__name__)
 
 
+def read_folds(split_run: str) -> dict[str, list[tuple[str, str]]]:
+    """(drawing_id, sha256) pairs per fold of a frozen split run."""
+    folds: dict[str, list[tuple[str, str]]] = defaultdict(list)
+    with open(REPO_ROOT / "runs" / split_run / "split.csv", newline="") as handle:
+        for row in csv.DictReader(handle):
+            folds[row["fold"]].append((row["drawing_id"], row["sha256"]))
+    return folds
+
+
 def _fold_scores(name: str, model: HistGradientBoostingClassifier, fold: Fold, classes) -> dict:
     """Pooled per-class scores of one fold, flattened for metrics.json."""
     predicted = model.predict(fold.features)
@@ -64,12 +73,7 @@ def main() -> None:
         handlers=[logging.FileHandler(cache_dir / "train_baseline.log"), logging.StreamHandler()],
     )
 
-    split_file = REPO_ROOT / "runs" / config["split"]["floorplancad_run"] / "split.csv"
-    folds: dict[str, list[tuple[str, str]]] = defaultdict(list)
-    with open(split_file, newline="") as handle:
-        for row in csv.DictReader(handle):
-            folds[row["fold"]].append((row["drawing_id"], row["sha256"]))
-
+    folds = read_folds(config["split"]["floorplancad_run"])
     all_digests = [digest for members in folds.values() for _, digest in members]
     build_features(cache_dir, all_digests, workers=settings["workers"])
 
