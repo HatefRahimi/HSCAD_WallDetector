@@ -36,11 +36,25 @@
 \usepackage{lmedoc/packages}
 % put in this file your abbreviations
 \input{abbreviations.tex}
-\usepackage[textsize=footnotesize,colorinlistoftodos]{todonotes}
-%\renewcommand{\todo}[1]{}   % uncomment for a clean print copy
+% Plain draft notes avoid the TikZ overhead of todonotes on limited online builds.
+\newif\ifthesisnotes
+\thesisnotestrue
+\newcommand{\todo}[2][]{%
+  \ifthesisnotes
+    \par\begingroup\small\color{faublue}%
+    \noindent\textbf{Draft note. }#2\par\endgroup
+  \fi
+}
+% Set \thesisnotesfalse above to hide notes in a reading copy.
 \graphicspath{{../results/figures/}}
+% Generated tables work both in the repository and in the flat upload archive.
+\makeatletter
+\def\input@path{{../results/}{results/}}
+\makeatother
 \hypersetup{pdftitle={Learning Semantic Structure from Industrial Vector CAD Floor
   Plans}, pdfauthor={Hatef Rahimi}, pdfsubject={Master's thesis}}
+% The supplied class reads this command when rendering the cooperation partner.
+\newcommand{\ZweitInstitut}{Siemens Healthineers AG}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % supress messages because of underful hbox, this is not a problem
@@ -81,7 +95,6 @@
     \Betreuer{Matthias Zinnen, Prof. Dr. Andreas Maier, Christian Petry} % Advisor
     \Start{TODO} % Start of thesis
     \Ende{TODO} % End of thesis
-    \ZweitInstitut{Siemens Healthineers AG} % Cooperation partner
   \end{deckblatt}
 
 
@@ -108,7 +121,33 @@ angenommen wurde. Alle Ausf"uhrungen, die w"ortlich oder sinngem"a"s
 \end{center}
 
 
-\vspace{5.0cm}
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+Diese Arbeit untersucht die Erkennung semantischer Klassen in industriellen
+vektorbasierten Grundrisszeichnungen, mit W\"anden als prim\"arem Ziel sowie
+T\"uren und Fenstern als weiteren Zielklassen.
+% source: docs/decisions/0008-floorplancad-only-training.md
+Das Versuchsdesign verwendet ausschlie\ss lich FloorPlanCAD als Trainingsquelle
+und sieht industrielle Zeichnungen nach einer geeigneten Konvertierung f\"ur
+eine externe Evaluation vor.
+% source: docs/decisions/0009-element-metrics.md
+Vektorbasierte und rasterbasierte Verfahren sollen anhand von Precision, Recall
+und dem harmonischen \(F\)-Ma\ss{} auf zur\"uckgehaltenen geometrischen Entit\"aten
+verglichen werden, wobei Rastervorhersagen vor der Bewertung auf die
+Vektorentit\"aten zur\"uckgef\"uhrt werden m\"ussen.
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+Die abgeschlossenen Datenpr\"ufungen legen eine Zuordnung der semantischen
+Kennungen der verwendeten Datenversion fest und weisen exakte Duplikate sowie
+gemeinsame Quellgruppen in den offiziellen Trainings- und Testordnern nach.
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+Eine gesonderte Aufteilung nach Quellgruppen ist f\"ur die folgenden Experimente
+festgeschrieben.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+Der vorliegende Entwurf berichtet diese Datenbefunde und das Evaluationsdesign;
+Modellg\"ute, Lernen ohne Layernamen, die \"Ubertragung auf industrielle Zeichnungen
+und die Erzeugung g\"ultiger Wandobjekte sind noch zu untersuchen.
+
+\bigskip
 
 \begin{center}
 \bfseries
@@ -117,6 +156,32 @@ angenommen wurde. Alle Ausf"uhrungen, die w"ortlich oder sinngem"a"s
 \normalfont
 \end{center}
 
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+This thesis investigates the recognition of semantic classes in industrial vector
+floor-plan drawings, with walls as the primary target and doors and windows as
+secondary targets.
+% source: docs/decisions/0008-floorplancad-only-training.md
+The experimental design uses FloorPlanCAD as the sole training source and reserves
+industrial drawings for external evaluation after conversion into a compatible
+representation.
+% source: docs/decisions/0009-element-metrics.md
+Vector and raster methods are to be compared using precision, recall and the
+harmonic-mean \(F\)-score over held-out geometric entities, requiring raster
+predictions to be mapped back to those entities before scoring.
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+The completed data audits establish a release-specific class interpretation and
+identify exact duplicates and source overlap across the official release folders.
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+A separate source-group split is frozen for subsequent experiments.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+The present draft reports these data findings and the evaluation design; model
+performance, learning without layer names, industrial transfer and valid wall
+generation remain to be measured.
+
+\todo[inline]{Complete the abstract with the principal model and industrial
+evaluation findings when they are available, then prepare the matching German
+abstract.}
 
 \cleardoublepage
 

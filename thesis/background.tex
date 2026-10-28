@@ -3,16 +3,99 @@
 
 \section{Floor Plan Understanding on Raster Images}
 \label{sec:raster-floor-plans}
-\todo{not yet drafted}
+% source: thesis/literature.bib:Liu2017RasterToVector
+Raster floor-plan understanding can recover structured geometry from an image:
+Liu et al. predict junctions carrying geometric and semantic information, then
+use integer programming to assemble them into a consistent vector drawing
+\cite{Liu2017RasterToVector}.
+% source: thesis/literature.bib:Liu2017RasterToVector
+Their reconstruction includes wall and opening primitives, and the resulting
+vector representation supports further manipulation and model visualisation.
+% source: thesis/literature.bib:Liu2017RasterToVector
+Recognition is coupled to geometric reconstruction in that approach.
+
+% source: thesis/literature.bib:Kalervo2019CubiCasa
+Kalervo et al. introduce CubiCasa5K together with a multi-task convolutional model
+for floor-plan image analysis, using polygon annotations to distinguish the
+objects represented in each drawing \cite{Kalervo2019CubiCasa}.
+% source: thesis/literature.bib:Kalervo2019CubiCasa
+The work provides an image-based setting in which learning replaces a pipeline
+centred on low-level image operations and fixed heuristics.
+% source: docs/decisions/0009-element-metrics.md
+For the present thesis, any image-based output still has to be assigned to the
+original vector entities before it can enter the representation comparison.
 
 \section{Learning on Vector CAD Data}
 \label{sec:vector-cad-learning}
-\todo{not yet drafted}
+% source: thesis/literature.bib:Fan2021FloorPlanCAD
+Vector drawings provide a different starting point: FloorPlanCAD supplies
+line-grained semantic annotations and introduces panoptic symbol spotting, which
+combines semantic recognition with the separation of countable symbol instances
+\cite{Fan2021FloorPlanCAD}.
+% source: thesis/literature.bib:Fan2021FloorPlanCAD
+Fan et al. propose a model combining convolutional image processing with graph
+convolution to use both image and relational information.
+% source: docs/decisions/0009-element-metrics.md
+The task adopted here is restricted to entity classification, without an instance
+separation requirement in the scoring protocol.
 
-\section{Graph Neural Networks for Structured Documents}
+% source: thesis/literature.bib:Fan2022CADTransformer
+CADTransformer instead treats graphical primitives as tokens and predicts semantic
+and instance outputs through separate heads, with neighbourhood-aware attention,
+hierarchical feature aggregation and position encoding adapting the model to
+drawing structure \cite{Fan2022CADTransformer}.
+% source: thesis/literature.bib:Fan2022CADTransformer
+Its Random Layer augmentation separates and recombines drawings by layer, showing
+that layer organisation can enter a learning method through data preparation as
+well as through the prediction architecture.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+The geometry-only objective in this thesis therefore requires an explicit account
+of the information available to a method, including how training examples are
+constructed.
+
+\section{Graph Learning on Structured Documents}
 \label{sec:gnn-structured-documents}
-\todo{not yet drafted}
+% source: thesis/literature.bib:Hamilton2017GraphSAGE
+GraphSAGE learns an aggregation function that builds a node representation from
+its features and those of neighbouring nodes, allowing representations to be
+computed for nodes that were not present during training
+\cite{Hamilton2017GraphSAGE}.
+% source: thesis/literature.bib:Hamilton2017GraphSAGE
+Successive aggregation steps extend the neighbourhood contributing information to
+the representation, and the framework supports supervised node classification.
+% source: thesis/literature.bib:Hamilton2017GraphSAGE
+Its inductive formulation also allows application to previously unseen graphs.
+
+% source: docs/decisions/0009-element-metrics.md
+The entity-level target makes node classification a relevant formulation for the
+vector branch, provided that every scored entity receives a prediction.
+% source: docs/decisions/0008-floorplancad-only-training.md
+The external evaluation also requires compatible inputs across public and
+industrial drawings, regardless of how a graph method represents their context.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+The usefulness of a particular graph architecture remains an experimental
+question, rather than a consequence of the task formulation.
 
 \section{Public Floor Plan Datasets}
 \label{sec:public-datasets-related}
-\todo{not yet drafted}
+% source: thesis/literature.bib:Fan2021FloorPlanCAD
+FloorPlanCAD provides vector drawings from residential and commercial settings,
+with semantic annotations attached at the level of drawing primitives
+\cite{Fan2021FloorPlanCAD}.
+% source: thesis/literature.bib:Kalervo2019CubiCasa
+CubiCasa5K provides floor-plan images and polygon-based annotations, supporting
+image analysis through a different input and annotation representation
+\cite{Kalervo2019CubiCasa}.
+% source: docs/decisions/0008-floorplancad-only-training.md
+FloorPlanCAD is the training source selected for this work.
+
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+The downloaded release still requires its own class interpretation, because the
+semantic identifiers used in the release differ from tables supplied with other
+implementations.
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+It also requires a source audit before held-out evaluation, since identical
+content and related crops occur across the official release folders.
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+The experiment described in \cref{ch:experiments} therefore uses a separately
+recorded split, whose assignment is fixed for later comparisons.

@@ -1,18 +1,102 @@
 \chapter{Method}
 \label{ch:method}
 
+% source: docs/decisions/0009-element-metrics.md
+The method is required to produce a class label for each geometric entity, so its
+output can be evaluated without changing the unit of analysis between vector and
+raster representations.
+% source: docs/decisions/0008-floorplancad-only-training.md
+The input representation must also be reproducible by the conversion used for
+external industrial evaluation.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+The requirements below are fixed parts of the task; architecture choices and
+unimplemented conversion procedures are identified separately.
+
+\section{Entity Classification Task}
+\label{sec:entity-task}
+% source: docs/decisions/0009-element-metrics.md
+Let \(E_D\) denote the scored geometric entities of drawing \(D\), and let
+\(\mathcal{C}\) denote the semantic output classes wall, door, window and
+\texttt{other}.
+% source: docs/decisions/0009-element-metrics.md
+For each entity \(e\in E_D\), the method returns a predicted class
+\(\hat y_e\in\mathcal{C}\), which is compared with the reference class \(y_e\)
+after the release-specific identifier mapping has been applied.
+% source: docs/decisions/0009-element-metrics.md
+Entities assigned to \texttt{other} remain in the evaluation, where predicting
+one of the target classes for them produces a false positive for that class.
+
 \section{Vector Representation as a Graph}
 \label{sec:vector-graph}
-\todo{not yet drafted}
+% source: docs/decisions/0009-element-metrics.md
+The vector method must return a semantic class for every scored geometric entity.
+% source: docs/decisions/0009-element-metrics.md
+Its output is evaluated using the entity-level protocol in \cref{sec:metrics}.
+% source: docs/decisions/0008-floorplancad-only-training.md
+Its inputs must also remain compatible with the planned conversion of industrial
+drawings.
+
+% source: thesis/literature.bib:Hamilton2017GraphSAGE
+A graph-learning formulation can represent local context through aggregation of
+neighbouring node features, as in GraphSAGE \cite{Hamilton2017GraphSAGE}.
+% source: docs/decisions/0009-element-metrics.md
+For this task, the connection to the evaluation is the assignment of output labels
+to the scored entities.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+The choice of nodes, edges and features still needs a method decision before this
+formulation can be presented as the implemented graph branch.
+
+\todo[inline]{Record the graph construction before drafting this method: node definition,
+geometric features, neighbourhood rule, edge features and treatment of disconnected
+geometry. No graph architecture or baseline has yet been established by a method
+decision.}
 
 \section{Raster Representation}
 \label{sec:raster-representation}
-\todo{not yet drafted}
+% source: docs/decisions/0009-element-metrics.md
+The raster branch is defined by the same entity labels at evaluation time, even
+though its intermediate predictions are attached to pixels.
+% source: docs/decisions/0008-floorplancad-only-training.md
+The rendering must also remain compatible with the converted industrial drawings
+used for the external evaluation.
+% source: docs/decisions/0009-element-metrics.md
+The connection between pixel predictions and entity predictions is therefore a
+required part of the branch, rather than an optional visualisation step.
+
+\todo[inline]{Record the raster rendering and model decisions, including crop extent,
+resolution, line thickness, channels, handling of layers and the link between
+rendered entities and reference labels. Add the architecture and training objective
+only after they have been selected and recorded.}
 
 \section{Mapping Raster Predictions Back to Vector Entities}
 \label{sec:raster-to-vector}
-\todo{not yet drafted}
+% source: docs/decisions/0009-element-metrics.md
+The raster branch must assign a class to each scored vector entity before its
+predictions can be compared with the vector branch.
+% source: docs/decisions/0009-element-metrics.md
+Pixel predictions alone do not meet the adopted evaluation protocol.
+% source: docs/decisions/0009-element-metrics.md
+The mapped entity predictions are pooled and scored by the same procedure as the
+vector predictions.
+
+\todo[inline]{Define and record the mapping rule, including geometric sampling, overlap
+between entities, background predictions, ties and entities outside a crop. Fix
+any mapping parameters using training or validation drawings before evaluation on
+held-out drawings.}
 
 \section{Wall Generation in HSCAD}
 \label{sec:wall-generation}
-\todo{not yet drafted}
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+Wall generation is the planned practical check after semantic recognition, asking
+whether the detected geometry can be converted into valid \gls{hscad} objects.
+% source: docs/decisions/0009-element-metrics.md
+The primary classification protocol measures the correctness of entity labels.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+Object validity requires a separate assessment, since the intended practical check
+concerns the geometry produced after classification.
+
+\todo[inline]{Record the wall-generation procedure and validity criteria before describing
+conversion into \gls{hscad} objects. Define how predicted entities become wall
+segments, which additional attributes are required and how rejected geometry is
+counted. Successful semantic classification alone does not establish this practical
+check.}

@@ -1,5 +1,39 @@
-% AUTHOR-WRITTEN. Agents may critique but must not draft.
+% Preliminary conclusion authorized by the author; see decision 0010.
 \chapter{Conclusion}
 \label{ch:conclusion}
 
-\todo{Author to write.}
+% source: docs/decisions/0008-floorplancad-only-training.md
+The thesis investigates semantic classification learned from public vector
+floor-plan drawings, with industrial drawings reserved for external evaluation
+after conversion into a compatible representation.
+% source: docs/decisions/0009-element-metrics.md
+Its comparison is defined at the level of geometric entities, using wall
+precision, recall and the harmonic-mean \(F\)-score as the primary measures and
+reporting doors and windows separately.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+The intended practical check is the conversion of detected geometry into valid
+\gls{hscad} wall objects.
+
+% source: runs/2026-10-26-floorplancad-parse/metrics.json
+The completed parsing run records the available public contents and entity
+inventory without reported file failures.
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+The accompanying audits establish a release-specific class interpretation and
+identify the source overlap and exact duplicates that motivate a separate
+evaluation partition.
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+That partition is fixed by a recorded source-group assignment.
+
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+These findings establish the current data preparation and evaluation design,
+while the questions of learnability from geometry, comparative model performance
+and transfer to industrial drawings remain unanswered by the available runs.
+% source: docs/decisions/0008-floorplancad-only-training.md
+External evaluation still requires the conversion procedure and reference-label
+recovery to be defined.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+The final conclusion must be completed from those measurements.
+
+\todo[inline]{Replace the preliminary evidence status with the final answers to
+the research questions once the model and industrial evaluation runs are recorded.}

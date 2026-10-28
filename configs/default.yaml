@@ -71,3 +71,8 @@ output:
   runs_dir: ./runs
   tables_dir: ./results/tables
   figures_dir: ./results/figures
+
+thesis_tables:
+  parse_run: 2026-10-26-floorplancad-parse
+  split_audit_run: 2026-10-26-floorplancad-split-audit-2
+  class_audit_run: 2026-10-26-floorplancad-class-audit

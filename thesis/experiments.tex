@@ -5,12 +5,151 @@
 
 \section{Splits}
 \label{sec:splits}
-\todo{not yet drafted}
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+The public-data split keeps related drawings together by assigning complete source
+groups to training, validation or held-out evaluation, with each source identified
+by its numbering namespace and file-name prefix rather than by the prefix alone.
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+The configured namespaces distinguish the separately numbered release folder from
+the folders that share a numbering scheme.
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+Sources containing a byte-identical file are merged into the same group, and exact
+copies are removed before the split is constructed.
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+Where copies share identical content, the copy with the smallest drawing identifier
+is retained, and every resulting group belongs entirely to a single fold.
+
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+The official release folders are not used as evaluation folds, because the recorded
+split audit found source groups and identical content shared between the official
+training and test folders.
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+The earlier assumption that prefixes identify a common source across all release
+folders was also rejected: the numbering namespace is needed to interpret them.
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+These checks establish the grouping rule used here.
+
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+Groups are sorted by identifier and shuffled using the seed stored in the split
+configuration.
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+Complete groups are assigned to the held-out fold until its target fraction of
+deduplicated drawings is reached, after which the validation fold is filled in the
+same way and the remaining groups form the training fold.
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+The fractions apply to drawings rather than groups because group sizes vary, and
+keeping a group intact can cause a fold to exceed its target size.
+
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+The resulting assignment is stored in \texttt{split.csv} under its split run
+identifier, and subsequent experiments load that assignment instead of recomputing
+it.
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+This keeps the evaluation drawings fixed when the splitting code changes.
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+Classes are not stratified; their distribution within each fold is to be reported
+alongside the split.
+
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+Exact deduplication does not detect overlapping crops with different content, so
+near-duplicate drawings across source groups remain an unresolved limitation.
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+Whether class imbalance between folds requires a revised assignment is also left
+open in the decision record.
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+A revised split requires a new decision and a new run.
+
+% source: runs/2026-10-26-floorplancad-split/metrics.json
+The recorded fold sizes and target-class counts are reported in
+\cref{tab:public-folds,tab:public-class-counts}.
+% source: runs/2026-10-26-floorplancad-split/metrics.json
+The inventory column counts all parsed entities, including text, whereas the
+target-class columns report the mapped wall, door and window counts.
+% source: docs/decisions/0009-element-metrics.md
+Those inventory totals are descriptive quantities, rather than the denominator
+of an entity-classification performance score.
+
+\begin{table}[htbp]
+  \centering
+  % source: runs/2026-10-26-floorplancad-split/metrics.json
+  \caption{Frozen public-data fold assignment. Parsed entity totals include text;
+  only the geometric entity types specified in the metric protocol are scored.}
+  \label{tab:public-folds}
+  \input{tables/public_folds.tex}
+\end{table}
+
+\begin{table}[htbp]
+  \centering
+  % source: runs/2026-10-26-floorplancad-split/metrics.json
+  \caption{Target-class entity counts in the frozen folds, using the adopted
+  release-specific mapping.}
+  \label{tab:public-class-counts}
+  \input{tables/public_class_counts.tex}
+\end{table}
 
 \section{Metrics}
 \label{sec:metrics}
-\todo{not yet drafted}
+% source: docs/decisions/0009-element-metrics.md
+Evaluation is performed on geometric entities, with precision, recall and the
+harmonic-mean \(F\)-score computed for each target class; walls are the primary
+target, while doors and windows are reported separately.
+% source: docs/decisions/0009-element-metrics.md
+Text entities are excluded from scoring because they carry no semantic labels in
+the downloaded release.
+% source: docs/decisions/0009-element-metrics.md
+The scored entity types are lines, arcs, circles and ellipses, with each reference
+class derived from the configured mapping of semantic identifiers
+to wall, door or window; identifiers outside those lists and missing labels are
+assigned to \texttt{other}.
+% source: docs/decisions/0009-element-metrics.md
+Every evaluated model must produce a class prediction for each scored entity.
+
+% source: docs/decisions/0009-element-metrics.md
+For a given target class, a true positive is an entity whose prediction and
+reference label both belong to that class.
+% source: docs/decisions/0009-element-metrics.md
+A false positive is an entity predicted as that class whose reference label differs,
+and a false negative is an entity belonging to that class whose prediction differs.
+% source: docs/decisions/0009-element-metrics.md
+Precision divides true positives by all positive predictions, while recall divides
+true positives by all reference positives, and the \(F\)-score is their harmonic mean.
+
+% source: docs/decisions/0009-element-metrics.md
+Counts are pooled over the held-out fold before the class scores are computed,
+giving each entity equal weight rather than giving each drawing equal weight.
+% source: docs/decisions/0009-element-metrics.md
+A score with an empty denominator is assigned zero under the adopted convention,
+and per-drawing scores may supplement the pooled scores but do not replace them.
+% source: docs/decisions/0009-element-metrics.md
+Raster predictions are evaluated only after their pixel outputs have been mapped
+back to the scored vector entities.
+% source: docs/decisions/0009-element-metrics.md
+The representation comparison therefore requires the mapping described in
+\cref{sec:raster-to-vector} before raster scores can be included, so that both
+branches are compared using the same unit of evaluation.
 
 \section{Implementation and Environment}
 \label{sec:implementation}
-\todo{not yet drafted}
+% source: docs/decisions/0008-floorplancad-only-training.md
+The planned external evaluation constrains the input representation: features and
+models may use only information that the conversion from industrial drawings can
+reproduce.
+% source: docs/decisions/0008-floorplancad-only-training.md
+The recorded constraints include compatible entity kinds, crop size and layer groups.
+% source: docs/decisions/0008-floorplancad-only-training.md
+The conversion procedure remains to be specified.
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+The class mapping, split seed and target fold fractions are configuration settings, while
+the actual drawing assignments are loaded from the recorded split run.
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+Experiments cite that run identifier to identify their evaluation partition.
+
+\todo[inline]{Add the selected model architectures, geometry and layer-name inputs,
+preprocessing, training settings, model-selection procedure and stopping criteria
+from implementation decisions and training runs. Define the geometry-only
+comparison explicitly before claiming that it answers the layer-name question.}
+\todo[inline]{Document the pinned software environment, hardware and code snapshot from
+the corresponding run records. Training execution and reproducibility have not yet
+been established by the decisions cited in this chapter.}

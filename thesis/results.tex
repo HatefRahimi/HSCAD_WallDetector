@@ -12,18 +12,93 @@
 \chapter{Results}
 \label{ch:results}
 
+\section{Data Preparation Findings}
+\label{sec:data-preparation-findings}
+% source: runs/2026-10-26-floorplancad-parse/metrics.json
+The parsing run establishes a public inventory of distinct drawing contents and
+their entities, with the coverage and type counts reported in
+\cref{tab:public-parse-summary,tab:public-entity-kinds}.
+% source: runs/2026-10-26-floorplancad-parse/metrics.json
+No file failures are reported in that run.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+This finding concerns data preparation and does not measure whether the semantic
+classes can be learned from geometry.
+
+% source: runs/2026-10-26-floorplancad-split-audit-2/metrics.json
+The source audit identifies exact-duplicate content clusters spanning the official
+training and test folders, together with a large share of official test files
+whose source group also occurs in training, as shown in
+\cref{tab:public-source-audit}.
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+The official release folders therefore do not provide the source separation
+required by the adopted evaluation design.
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+The experiments use deduplication and source-group assignment instead.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  % source: runs/2026-10-26-floorplancad-split-audit-2/metrics.json
+  \caption{Source overlap and exact-duplicate evidence in the official release
+  folders, before the source-group split used in this work.}
+  \label{tab:public-source-audit}
+  \input{tables/public_source_audit.tex}
+\end{table}
+
+% source: runs/2026-10-26-floorplancad-split-audit-2/metrics.json
+Layer-vocabulary similarity also distinguishes the release folders that share a
+numbering namespace from the separately numbered folder, as reported in
+\cref{tab:source-layer-similarity}.
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+The same-prefix comparison supports the adopted namespace grouping, while the
+random-pair comparison provides a reference for interpreting those similarities.
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+A prefix alone is insufficient to identify a common source across all folders.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  % source: runs/2026-10-26-floorplancad-split-audit-2/metrics.json
+  \caption{Layer-vocabulary Jaccard similarities recorded by the source audit.
+  Similarity supports a grouping convention, but does not verify building identity.}
+  \label{tab:source-layer-similarity}
+  \input{tables/public_layer_similarity.tex}
+\end{table}
+
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+The resulting training, validation and held-out assignments are fixed in the split
+run, so later experiments can evaluate on the same drawing partition.
+% source: runs/2026-10-26-floorplancad-split/metrics.json
+The recorded folds contain each target class, with walls more numerous than doors
+or windows in every fold, as shown in \cref{tab:public-class-counts}.
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+These checks do not exclude near-duplicate crops filed under different groups,
+which remains a limit of the current source separation.
+
 \section{Baseline}
 \label{sec:baseline}
-\todo{not yet drafted}
+\todo[inline]{No trained baseline result is recorded. Introduce the baseline with a method
+decision, then include its generated wall precision, recall and F-score table from
+the corresponding training and evaluation runs. Do not substitute dataset-audit
+results for model performance.}
 
 \section{Comparison of Representations}
 \label{sec:representation-comparison}
-\todo{not yet drafted}
+\todo[inline]{Include the generated representation comparison after both branches have
+been evaluated on the same held-out entities. Report the raster-to-vector mapping
+and geometry-only inputs with the comparison; report doors and windows separately
+from walls.}
 
 \section{Public Data versus the Archive}
 \label{sec:public-vs-archive}
-\todo{not yet drafted}
+\todo[inline]{Compare public-data evaluation with external archive evaluation only after
+conversion and reference-label verification have been recorded. The current design
+trains on public data only. No archive training or fine-tuning result is planned
+under the current decision.}
 
 \section{Failure Analysis}
 \label{sec:failure-analysis}
-\todo{not yet drafted}
+\todo[inline]{Include generated failure counts and approved aggregate breakdowns tied to
+evaluation run identifiers. Distinguish classification errors from parsing,
+conversion, label-recovery and wall-generation failures where the recorded outputs
+support that distinction.}

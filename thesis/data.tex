@@ -6,16 +6,171 @@
 
 \section{The Archive}
 \label{sec:archive}
-\todo{not yet drafted}
+% source: docs/decisions/0008-floorplancad-only-training.md
+The industrial archive is reserved for external evaluation of models trained on
+public drawings; training on the archive is outside the current experimental
+design, and the drawings
+are to be converted into a representation compatible with the public training data
+before predictions are evaluated.
+% source: docs/decisions/0008-floorplancad-only-training.md
+This separates the training source from the intended application, although the
+conversion procedure and the recovery of reference labels remain unresolved.
+% source: docs/decisions/0008-floorplancad-only-training.md
+The proposed route to reference labels is matching against the planner's
+\gls{hscad} redraw, but the decision record does not establish a completed matching
+procedure or its reliability, leaving archive evaluation as a planned experiment.
+
+\todo[inline]{Describe the archive from an approved aggregate report, including drawing
+coverage, drafting-style variation, conversion failures and the provenance of the
+external evaluation labels. No archive statistics are available for this section.}
 
 \section{Label Recovery}
 \label{sec:label-recovery}
-\todo{not yet drafted}
+% source: docs/decisions/0008-floorplancad-only-training.md
+The proposed archive evaluation requires reference labels obtained through
+\gls{hscad} redraw matching.
+% source: docs/decisions/0008-floorplancad-only-training.md
+How the original geometry is matched to the redraw, and how unmatched geometry is
+handled, has not yet been fixed.
+% source: docs/decisions/0008-floorplancad-only-training.md
+The label-recovery procedure remains to be defined.
+
+\todo[inline]{Add the decision record defining coordinate alignment, matching criteria,
+ambiguous matches and rejection rules before describing label recovery as an
+implemented method. Report recovery coverage and failure reasons through generated
+artifacts from a company-side run.}
 
 \section{Hand-Verified Evaluation Set}
 \label{sec:hand-verified-set}
-\todo{not yet drafted}
+% source: docs/decisions/0008-floorplancad-only-training.md
+The external evaluation still requires a procedure for obtaining reference labels
+from industrial drawings, with redraw matching identified as the proposed route.
+% source: docs/decisions/0008-floorplancad-only-training.md
+The current decision does not establish a completed, independently verified
+archive evaluation set.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+Its reliability therefore remains outside the findings available in this draft.
+
+\todo[inline]{Record whether a hand-verified archive evaluation set will be created. If it
+is, document drawing selection, verification instructions, disagreement handling
+and independence from training and model selection. Its existence and reliability
+must not be assumed.}
 
 \section{Public Datasets}
 \label{sec:public-datasets}
-\todo{not yet drafted}
+% source: docs/decisions/0008-floorplancad-only-training.md
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+FloorPlanCAD is the sole training source in the current design, and its downloaded
+release associates geometric entities with a
+\texttt{semantic-id} attribute, whose interpretation is fixed by a release-specific
+class mapping.
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+The mapping is stored in the experiment configuration.
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+Class names could not be taken directly from the tables distributed with other
+implementations, because their attribute convention and wall identifier differ
+from those in the downloaded release.
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+The adopted mapping was instead derived from the release itself, using layer names
+as evidence and rendered crops where layer names could not separate classes;
+walls, doors and windows are retained as separate targets, while the remaining semantic
+classes, including curtain walls, are assigned to the background class
+\texttt{other}.
+
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+The evidence behind the mapping is uneven: wall-layer associations support the
+wall mapping, whereas the separation of doors
+from windows also depends on visual inspection of highlighted geometry.
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+Some drawings place doors and windows on the same layer, and the adopted sliding-door
+assignment is explicitly identified as uncertain in the decision record.
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+Door and window results therefore inherit this limitation of the reference labels.
+
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+Drawing identity includes the release folder as well as the file stem, because
+identical names in different folders do not necessarily identify identical content.
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+Exact duplicate files are removed before dataset counts or held-out folds are
+formed.
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+The remaining drawings are grouped by source for the split described in
+\cref{sec:splits}.
+
+\subsection{Parsing Coverage and Entity Types}
+\label{sec:public-parsing}
+% source: runs/2026-10-26-floorplancad-parse/metrics.json
+The completed parsing run reports the release files processed, the distinct
+contents parsed, cache reuse and failures, together with the total parsed entity
+count shown in \cref{tab:public-parse-summary}.
+% source: runs/2026-10-26-floorplancad-parse/metrics.json
+The entity-type breakdown in \cref{tab:public-entity-kinds} includes text as well
+as the geometric primitives retained by the reader.
+% source: docs/decisions/0009-element-metrics.md
+These inventory counts describe the input representation; text is subsequently
+excluded from the classification metric.
+
+\begin{table}[htbp]
+  \centering
+  % source: runs/2026-10-26-floorplancad-parse/metrics.json
+  \caption{Public-release parsing summary, computed over distinct content where
+  indicated. Cache-served files and distinct contents are separate reported
+  quantities.}
+  \label{tab:public-parse-summary}
+  \input{tables/public_parse_summary.tex}
+\end{table}
+
+\begin{table}[htbp]
+  \centering
+  % source: runs/2026-10-26-floorplancad-parse/metrics.json
+  \caption{Parsed entities by geometric kind, with text reported separately.
+  Counts refer to distinct contents in the parsing run.}
+  \label{tab:public-entity-kinds}
+  \input{tables/public_entity_kinds.tex}
+\end{table}
+
+% source: runs/2026-10-26-floorplancad-parse/metrics.json
+The recorded run reports no failed files, so parsing failures do not reduce the
+public drawing inventory in this snapshot.
+% source: runs/2026-10-26-floorplancad-parse/metrics.json
+The count of entities with semantic identifiers is smaller than the total entity
+count, making the distinction between missing labels and mapped target classes
+relevant to the scoring convention.
+% source: docs/decisions/0009-element-metrics.md
+A missing identifier on a scored geometric entity maps to \texttt{other}, rather
+than causing that entity to be omitted from evaluation.
+
+\subsection{Release-Specific Class Interpretation}
+\label{sec:public-class-interpretation}
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+The adopted association between semantic identifiers and output classes is shown
+in \cref{tab:public-class-mapping}, including the residual class used for identifiers
+outside the target lists.
+% source: runs/2026-10-26-floorplancad-class-audit/metrics.json
+\Cref{tab:public-wall-layer-evidence} reports the wall identifier's association
+with wall layers in the class audit, which covers release files before the
+deduplication used for the experimental split.
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+Layer association is evidence for interpreting an identifier, rather than an
+independent verification of every assigned semantic label.
+
+\begin{table}[htbp]
+  \centering
+  % source: docs/decisions/0005-floorplancad-class-mapping.md
+  \caption{Release-specific semantic identifier mapping used for the evaluated
+  classes. Curtain wall remains outside the wall target under the current mapping.}
+  \label{tab:public-class-mapping}
+  \input{tables/public_class_mapping.tex}
+\end{table}
+
+\begin{table}[htbp]
+  \centering
+  % source: runs/2026-10-26-floorplancad-class-audit/metrics.json
+  \caption{Wall-layer association reported by the class audit over release files.
+  This is label-interpretation evidence, rather than classifier precision.}
+  \label{tab:public-wall-layer-evidence}
+  \input{tables/public_wall_layer_evidence.tex}
+\end{table}
+
+\todo[inline]{Resolve the recorded licence question for use of FloorPlanCAD in the industry
+partnership before making any claim about deployment suitability.}

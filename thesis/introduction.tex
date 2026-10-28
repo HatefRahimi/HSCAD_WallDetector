@@ -1,5 +1,114 @@
-% AUTHOR-WRITTEN. Agents may critique but must not draft.
+% Drafting explicitly authorized by the author; see decision 0010.
 \chapter{Introduction}
 \label{ch:introduction}
 
-\todo{not yet drafted}
+\section{Motivation}
+\label{sec:motivation}
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+Industrial floor-plan interpretation is the application considered in this thesis,
+with the recognition of walls as the primary step towards converting drawing
+geometry into objects that can be used in facility planning.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+Walls are prioritised in the project brief because they are common and expensive
+to redraw manually; doors and windows are secondary targets, and valid
+\gls{hscad} wall generation is the intended practical check.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+The geometry has to be given a meaning.
+
+% source: docs/decisions/0008-floorplancad-only-training.md
+The experimental design separates the source used for learning from the drawings
+on which industrial applicability is to be assessed: FloorPlanCAD supplies the
+training data, while industrial drawings are reserved for external evaluation
+after conversion.
+% source: docs/decisions/0008-floorplancad-only-training.md
+This makes the transfer from public drawings to industrial drawings the central
+empirical question of the current design.
+% source: docs/decisions/0008-floorplancad-only-training.md
+Training on the industrial archive is outside this scope.
+
+\section{Problem Definition}
+\label{sec:problem-definition}
+% source: docs/decisions/0009-element-metrics.md
+The prediction target is the semantic class of each geometric entity in a drawing,
+with wall, door, window and \texttt{other} forming the output classes used in the
+evaluation protocol.
+% source: docs/decisions/0009-element-metrics.md
+Lines, arcs, circles and ellipses are scored, while text is excluded because the
+downloaded public release provides no semantic labels for its text entities.
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+The association between the release's semantic identifiers and these output
+classes is established through a separate class audit, rather than assumed from
+tables accompanying a different implementation.
+
+% source: docs/decisions/0009-element-metrics.md
+The unit of prediction also fixes the unit of comparison: a vector method returns
+entity labels directly, whereas a raster method must first map its pixel
+predictions back to the vector entities being scored.
+% source: docs/decisions/0009-element-metrics.md
+Wall precision, recall and the harmonic-mean \(F\)-score are the primary measures.
+% source: docs/decisions/0009-element-metrics.md
+Doors and windows are reported separately, so that their performance does not
+change the meaning of the wall score.
+
+\section{Research Questions}
+\label{sec:research-questions}
+% source: docs/decisions/0008-floorplancad-only-training.md
+The central question is whether a model trained on public vector floor-plan
+drawings can recognise semantic classes in industrial drawings after a compatible
+conversion, without training on the industrial archive.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+The geometry-only objective asks whether geometry and its surrounding context
+carry enough information for this classification when layer names are unavailable
+or unreliable.
+% source: docs/decisions/0008-floorplancad-only-training.md
+Both questions require an external evaluation whose inputs and reference labels
+have been defined independently of the model predictions.
+
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+The reliability of the public labels is part of the problem, because an incorrect
+class mapping would change what the model is trained and evaluated to recognise.
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+The independence of held-out drawings is equally consequential: the recorded
+source audit identifies related drawings and exact duplicates spanning the
+official release folders.
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+The experiments therefore use a frozen assignment of complete source groups.
+
+\section{Objectives and Scope}
+\label{sec:objectives}
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+The intended outcome is a comparison of methods for assigning semantic classes to
+drawing geometry, followed by an assessment of transfer to industrial drawings
+and a practical check of wall generation.
+% source: docs/decisions/0008-floorplancad-only-training.md
+The external evaluation constrains which inputs may be used, since the conversion
+from industrial drawings has to reproduce the representation used for learning.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+These are research objectives, rather than established performance claims.
+
+% source: runs/2026-10-26-floorplancad-parse/metrics.json
+The completed public-data work includes a parsing run reporting processed content,
+entity types and failures.
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+The class interpretation, source grouping and fold assignment are also recorded,
+providing the data preparation on which subsequent experiments can be based.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+Model training, the representation comparison and industrial transfer remain to
+be measured; the present draft reports the completed audits and leaves those
+empirical answers open.
+
+\section{Thesis Structure}
+\label{sec:thesis-structure}
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+\Cref{ch:background} introduces the relevant raster, vector and graph-learning
+approaches, and \cref{ch:data} describes the public data and the planned recovery
+of industrial reference labels.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+The method requirements are set out in \cref{ch:method}, followed by the split and
+scoring protocol in \cref{ch:experiments} and the available findings in
+\cref{ch:results}.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+\Cref{ch:discussion,ch:conclusion} distinguish what those findings establish from
+the questions that still require model and industrial evaluation.

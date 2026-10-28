@@ -1,5 +1,86 @@
-% AUTHOR-WRITTEN. Agents may critique but must not draft.
+% Preliminary discussion authorized by the author; see decision 0010.
 \chapter{Discussion}
 \label{ch:discussion}
 
-\todo{Author to write.}
+\section{What the Data Audits Establish}
+\label{sec:audit-interpretation}
+% source: runs/2026-10-26-floorplancad-parse/metrics.json
+The public parsing run establishes the contents and entity inventory available for
+experimentation, with no failed files reported in the recorded snapshot.
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+The class audit establishes an explicit interpretation of the release's semantic
+identifiers, including the uncertain parts of the door and window mapping.
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+The frozen split provides a common drawing assignment for later experiments.
+
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+Together, these records describe the data preparation on which model experiments
+can be built, but they do not establish classification performance or industrial
+applicability.
+% source: docs/decisions/0008-floorplancad-only-training.md
+The industrial question still requires converted drawings and external reference
+labels, whose procedures remain unresolved in the current decision.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+The distinction matters for interpreting the present findings.
+
+\section{Independence of Held-Out Drawings}
+\label{sec:split-limitations}
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+The overlap found in the official release folders makes source grouping part of
+the experimental method, since an evaluation based on those folders would not
+have the source separation required here.
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+Removing exact copies addresses identical content, while keeping complete source
+groups together addresses the relation between crops attributed to a common
+source under the adopted naming convention.
+% source: docs/decisions/0006-floorplancad-split-by-source-group.md
+Neither check identifies every possible near-duplicate crop.
+
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+The assignment is also not stratified by class, and keeping groups intact can
+cause fold sizes to exceed their target fractions.
+% source: runs/2026-10-26-floorplancad-split/metrics.json
+The class counts provide a description of the resulting partition, rather than
+evidence that the folds have identical class composition.
+% source: docs/decisions/0007-floorplancad-fold-assignment.md
+Any change to that partition requires a new recorded split, preserving the
+meaning of comparisons made under the existing assignment.
+
+\section{Reference Labels and Metric Interpretation}
+\label{sec:label-metric-limitations}
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+The wall mapping is supported by layer associations, whereas the adopted door
+and window assignments also depend on visual inspection where shared layers fail
+to separate the classes.
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+This evidence identifies a release convention without verifying every reference
+label, and the uncertain sliding-door assignment remains a limitation.
+% source: docs/decisions/0005-floorplancad-class-mapping.md
+The exclusion of curtain walls also fixes the current meaning of the wall target.
+
+% source: docs/decisions/0009-element-metrics.md
+Pooled scoring weights each entity equally, so drawings containing more scored
+geometry contribute more to the resulting class counts than smaller drawings.
+% source: docs/decisions/0009-element-metrics.md
+Per-drawing scores can supplement this view, but the primary precision, recall
+and \(F\)-score remain defined over the pooled held-out entities.
+% source: docs/decisions/0009-element-metrics.md
+The raster-to-vector mapping is part of the evaluated method because it determines
+which entity predictions enter those counts.
+
+\section{Questions Requiring Further Experiments}
+\label{sec:remaining-evidence}
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+The geometry-only question remains open until an evaluated method and its inputs
+are recorded, including whether layer information is available during training
+or prediction.
+% source: docs/decisions/0008-floorplancad-only-training.md
+The public-to-industrial question remains open until compatible conversion and
+reference-label recovery support the external evaluation.
+% source: docs/decisions/0010-evidence-backed-thesis-draft.md
+Valid wall generation is a further practical check, and its outcome cannot be
+inferred from the completed data audits.
+
+\todo[inline]{Extend this discussion with measured model comparisons, the
+geometry-only experiment, industrial transfer and wall-generation findings after
+the corresponding evaluation runs exist.}
