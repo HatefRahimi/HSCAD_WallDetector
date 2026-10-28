@@ -1,0 +1,14 @@
+{
+  "config_file": "configs/default.yaml",
+  "fold": "val",
+  "length_edges": [
+    "0.0",
+    "1.0",
+    "3.0",
+    "10.0",
+    "30.0",
+    "inf"
+  ],
+  "min_walls_per_drawing": 50,
+  "model_run": "2026-10-28-baseline-hgb"
+}
