@@ -1,0 +1,70 @@
+{
+  "baseline": {
+    "l2_regularization": 1.0,
+    "learning_rate": 0.1,
+    "max_iter": 300,
+    "max_leaf_nodes": 63,
+    "min_samples_leaf": 200,
+    "n_iter_no_change": 15,
+    "seed": 20261008,
+    "workers": 14
+  },
+  "classes": {
+    "door": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "wall": [
+      1
+    ],
+    "window": [
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  "config_file": "configs/default.yaml",
+  "features": [
+    "kind_line",
+    "kind_arc",
+    "kind_circle",
+    "kind_ellipse",
+    "length",
+    "log_length",
+    "relative_length",
+    "chord",
+    "orientation_sin2",
+    "orientation_cos2",
+    "axis_deviation_deg",
+    "radius",
+    "sweep_deg",
+    "radius_ratio",
+    "endpoints_on_border",
+    "neighbours_within_1",
+    "neighbours_within_3",
+    "neighbours_within_10",
+    "arcs_within_3",
+    "nearest_arc",
+    "texts_within_3",
+    "partner_gap",
+    "second_partner_gap",
+    "partners_within_3",
+    "partners_within_10",
+    "partner_length_ratio",
+    "collinear_within_3",
+    "perpendicular_touching",
+    "endpoint_degree_min",
+    "endpoint_degree_max",
+    "drawing_log_elements",
+    "drawing_median_line_length"
+  ],
+  "features_version": 1,
+  "reader_version": 1,
+  "scored_test": true,
+  "split_run": "2026-10-26-floorplancad-split"
+}
