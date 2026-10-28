@@ -22,10 +22,10 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 THESIS_DIR = REPO_ROOT / "thesis"
 BIB_FILE = THESIS_DIR / "literature.bib"
-# Chapter files sit flat beside thesis_main.tex. lmedoc/ and appendix.tex are not checked.
+# Authored sources sit beside thesis_main.tex; vendor files under lmedoc/ are excluded.
 CHAPTERS = (
     "introduction", "background", "data", "methodology",
-    "experiments", "results", "discussion", "conclusion",
+    "experiments", "results", "discussion", "conclusion", "appendix", "thesis_main",
 )
 
 BIB_ENTRY = re.compile(r"^\s*@\w+\s*\{\s*([^,\s]+)\s*,", re.MULTILINE)
@@ -34,6 +34,7 @@ CITE_CALL = re.compile(r"\\(?:cite[a-zA-Z]*|parencite|textcite)\s*(?:\[[^\]]*\])
 COMMENT = re.compile(r"(?<!\\)%.*$", re.MULTILINE)
 # A bare decimal in prose: the thing that should have come from a generated table.
 INLINE_NUMBER = re.compile(r"(?<![\w.\\{=\-])\d+\.\d+(?![\w.}])")
+TODO_CALL = re.compile(r"\\todo\s*(?:\[[^\]]*\]\s*)?\{")
 
 
 def strip_comments(text: str) -> str:
@@ -78,7 +79,7 @@ def main() -> int:
                         "use \\input{../results/tables/...} instead"
                     )
 
-            if "\\todo{" in line:
+            if TODO_CALL.search(line):
                 todos.append(f"{rel}:{lineno}: {line.strip()[:90]}")
 
     if todos:

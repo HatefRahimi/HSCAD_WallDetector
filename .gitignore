@@ -27,6 +27,8 @@ venv/
 *.synctex.gz
 *.toc
 thesis/main.pdf
+thesis/thesis_main.pdf
+thesis-overleaf.zip
 
 # Large run outputs (metrics/config JSON are kept)
 runs/**/checkpoints/

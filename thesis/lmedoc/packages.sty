@@ -19,7 +19,8 @@
 \definecolor{faublue}{RGB}{0,51,102}
 
 % defines units
-\RequirePackage[binary-units,abbreviations]{siunitx}
+\RequirePackage{siunitx}
+\sisetup{mode=text}
 
 % allows inline enumerate
 \RequirePackage[inline]{enumitem}
@@ -29,7 +30,7 @@
 \RequirePackage[all]{nowidow}
 
 % great packages to make nice figures/plots/ 
-\RequirePackage{tikz}
+% Load TikZ only when a chapter contains a TikZ diagram.
 %\RequirePackage{pgfplots}
 
 % you can even separate table content and layout
@@ -39,17 +40,11 @@
 % url package, it also breaks at hyphens
 \RequirePackage[hyphens]{url}
 
-% typesetting numbers and units
-\RequirePackage{siunitx}
-\sisetup{mode=text}% use text mode for numbers
-
-% ++ \url{} better breaking of urls and connect w. hyperref
-\RequirePackage{url}
 % ++ Biblatex
 %    Replaces the old 'bibtex'. The bibtex step has to be replaced with 'biber'.
 \RequirePackage[backend=biber, bibencoding=utf8, giveninits=true,
 maxbibnames=99, % show all authors in the bibliography
-maxalphanames=1, minalphanames=1, style=alphabetic,%
+maxalphanames=1, minalphanames=1,%
 style=trad-alpha, backref=true]{biblatex}
 % biblatex backref
 \DefineBibliographyStrings{english}{%

@@ -105,7 +105,7 @@ Exception: the acknowledgements, where "I" is fine.
 | Rule | Setting |
 |---|---|
 | Language | English |
-| Spelling | **PICK ONE AND WRITE IT HERE:** British / American |
+| Spelling | British |
 | Person | None (see §3) |
 | Voice | Passive preferred for methods and procedure (see §3) |
 | Compound adjectives | Hyphenate before a noun: *held-out drawings*, *layer-based rules*, *wall-generation task*. Do not hyphenate after the noun (*drawings that were held out*) or after an *-ly* adverb (*manually extracted*) |
